@@ -1,12 +1,8 @@
 import 'dart:convert';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_country/Theme/theme_provider.dart';
 import 'package:my_country/screen/country_details.dart';
 import 'package:provider/provider.dart';
-
-import '../api/fetch_country.dart';
 import '../api/model/model_data.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,21 +17,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  late Future<List<Country>> futureCountries;
-
 /*
-  @override
-  void initState() {
-    super.initState();
-    futureCountries = fetchCountries();
-  }
-
-  Future<List<Country>> fetchCountries() async {
-    final countryService = CountryService();
-    final data = await countryService.fetchCountries();
-    return data.map((json) => Country.fromJson(json)).toList();
-  }
+  late Future<List<Country>> futureCountries;
 */
+
 
   List<dynamic> countries = [];
   List<dynamic> filteredCountries = []; // New list for filtered countries
@@ -51,10 +36,8 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    super.initState();
-
     fetchCountries();
-
+    super.initState();
   }
 
 
@@ -63,11 +46,9 @@ class _HomeState extends State<Home> {
       final response = await http.get(Uri.parse('https://restcountries.com/v3.1/all'));
 
       if (response.statusCode == 200) {
-
-        setState(() {isLoading = false;
-
+        setState(() {
           countries = jsonDecode(response.body);
-
+          isLoading = false;
 
 
         });
@@ -86,6 +67,7 @@ class _HomeState extends State<Home> {
       print('Error fetching countries: $e');
     }
   }
+
   void  filterCountries (String text){
     setState(() {
       searchText = text;
@@ -161,19 +143,7 @@ class _HomeState extends State<Home> {
       ),
 
 
-      body: /*FutureBuilder<List<Country>>(
-          future: futureCountries,
-          builder: (context, snapshot){
-            if(snapshot.connectionState == ConnectionState.waiting){
-              return Center(child: CircularProgressIndicator());
-            }else if(snapshot.hasError){
-              return Center(child: Text('error : ${snapshot.error}'));
-            }else if (!snapshot.hasData || snapshot.data!.isEmpty){
-              return Center(child: Text('No data found'),);
-            }else{
-               final countries = snapshot.data!;
-               return */
-      Column(
+      body: Column(
         children: [
           Padding(
               padding: EdgeInsets.all(8),
@@ -224,7 +194,6 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-
           Expanded(
             child: ListView.builder(
                          itemCount: !isSearching ? countries.length: filteredCountries.length,

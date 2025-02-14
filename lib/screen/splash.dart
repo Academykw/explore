@@ -12,20 +12,20 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
 
-  void getData() async{
+ /* void getData() async{
     final response = await http.get(Uri.parse('https://restcountries.com/v3.1/all'));
 
     print(response.body);
-  }
+  }*/
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
-   print('hjkgu yt');
-    Future.delayed(Duration(seconds: 5,), (){
+
+
+    Future.delayed(Duration(seconds: 5,), () {
       
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
+       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (_)  => Home() ));
     });
   }
