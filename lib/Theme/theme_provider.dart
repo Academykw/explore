@@ -35,19 +35,6 @@ ThemeData get getTheme => _selectedTheme;
    _selectedTheme = _selectedTheme == dark ? light : dark;
    notifyListeners();
   }
- /* ThemeData _themeData = lightMode;
-  ThemeData get themeData => _themeData;
 
-  set themeData( ThemeData themeData){
-    _themeData = themeData;
-    notifyListeners();
-  }
-  void toggleTheme(){
-    if(_themeData == lightMode){
-      themeData = darkMode;
-    }else{
-      themeData = lightMode;
-    }
-  }*/
 
 }

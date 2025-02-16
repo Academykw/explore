@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:my_country/Theme/theme_provider.dart';
-import 'package:my_country/screen/country_details.dart';
+
 import 'package:provider/provider.dart';
+import '../Theme/theme_provider.dart';
 import '../api/model/model_data.dart';
 import 'package:http/http.dart' as http;
+
+import 'country_details.dart';
 
 
 
@@ -42,8 +44,9 @@ class _HomeState extends State<Home> {
 
 
   Future<void> fetchCountries() async {
+    isLoading = true;
     try {
-      final response = await http.get(Uri.parse('https://restcountries.com/v3.1/all'));
+      final response = await http.get(Uri.parse('https://restcountries.com/v3.1/region/africa'));
 
       if (response.statusCode == 200) {
         setState(() {
@@ -54,7 +57,7 @@ class _HomeState extends State<Home> {
         });
       } else {
         setState(() {
-          errorMessage = 'Failed to load countries: ${response.statusCode}';
+          errorMessage = 'Failed to load countries/Bad network: ${response.statusCode}';
           isLoading = false;
         });
         throw Exception('Failed to load countries');
@@ -72,11 +75,7 @@ class _HomeState extends State<Home> {
     setState(() {
       searchText = text;
       if(text.isEmpty){
-        filteredCountries = countries
-            .where((country) => country['name']['common']
-            .toLowerCase()
-            .contains(lastSearchText.toLowerCase())
-        ).toList();
+        filteredCountries = countries;
 
       }else {
         lastSearchText = text;
@@ -163,37 +162,12 @@ class _HomeState extends State<Home> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              IconButton(
-                icon: const Icon(Icons.filter_list),
-                onPressed: () {
-                  setState(() {
-                    showFilter = !showFilter; // Toggle filter visibility
-                  });
-                },
-              ),
+
+
             ],
           ),
 
-          if (showFilter) // Show filter options conditionally
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DropdownButton<String>(
-                value: selectedRegion,
-                items: <String>['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedRegion = newValue!;
-                    applyRegionFilter(); // Apply filter when region changes
-                  });
-                },
-              ),
-            ),
+
           Expanded(
             child: ListView.builder(
                          itemCount: !isSearching ? countries.length: filteredCountries.length,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:my_country/screen/home.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -28,12 +30,12 @@ class _SplashState extends State<Splash> {
        Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (_)  => Home() ));
     });
+
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-
       body: Center(
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +48,7 @@ class _SplashState extends State<Splash> {
             ),),
             Padding(
                 padding: EdgeInsets.fromLTRB(110, 0, 0, 0),
-            child: Text('COUNTRY',
+            child: Text('AFRICA',
               style: TextStyle(
                 fontSize: 24,
                 fontStyle: FontStyle.italic,

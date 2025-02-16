@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_country/Theme/theme.dart';
-import 'package:my_country/Theme/theme_provider.dart';
-import 'package:my_country/screen/home.dart';
 import 'package:my_country/screen/splash.dart';
+
+
 import 'package:provider/provider.dart';
+
+import 'Theme/theme_provider.dart';
 
 void main() {
   runApp(

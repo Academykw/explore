@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class CountryDetails extends StatelessWidget {
   final dynamic country;
+
   const CountryDetails({super.key,  required this.country});
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,65 +29,151 @@ class CountryDetails extends StatelessWidget {
       ),
           SizedBox(height: 20,),
 
-          //capital
-          Text('Capital: ${country['capital']?[0] ?? "N/A"}',
-          style: TextStyle(
-            fontSize: 20,
 
-            //population
-          ),),
-          Text('Population: ${country['population']}',
-            style: TextStyle(
-              fontSize: 20,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (country.containsKey('capital')) ...[
+                const Text('Capital:',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.amber,
+                    fontStyle: FontStyle.normal,
+                  ),),
 
-            ),),
-
-          //region
-          Text('Region: ${country['region'] ?? "N/A"}',
-            style: TextStyle(
-              fontSize: 20,
-            ),
+                  // capital
+                  Text('-${country['capital'] ?[0] ?? "N/A"} ',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),),
+              ]
+            ],
           ),
 
-          //sub region
-          Text('Subregion: ${country['subregion'] ?? "N/A"}',
-            style: TextStyle(
-              fontSize: 20,
-
-            ),),
 
 
-
-          if (country.containsKey('currencies')) ...[
-            const Text('Currencies:',
-            style: TextStyle(
-              fontSize: 20,
-              fontStyle: FontStyle.italic,
-            ),),
-
-            for (var currency in country['currencies'].values)
-              Text('- ${currency['name']} (${currency['symbol']})',
-              style: TextStyle(
-                fontSize: 22,
-              ),),
+          SizedBox(height: 20,),
 
 
-            if (country.containsKey('languages')) ...[
-              const Text('Languages :',
-              style: TextStyle(
-                fontSize: 20,
-                fontStyle: FontStyle.italic,
-              ),),
-              for (var lang in country['languages'].values) Text('- $lang',
-              style: TextStyle(
-                fontSize: 20,
-              ),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (country.containsKey('population')) ...[
+                const Text('Population:',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.amber,
+                    fontStyle: FontStyle.normal,
+                  ),),
+
+                  // population
+                  Text('-${country['population']} ',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),),
+              ]
             ],
-          ],
+          ),
 
 
-        ],
+          SizedBox(height: 20,),
 
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (country.containsKey('region')) ...[
+                const Text('Region:',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.amber,
+                    fontStyle: FontStyle.normal,
+                  ),),
+
+
+
+
+                  /// region
+                  Text('-${country['region'] ?? "N/A"} ',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),),
+              ]
+            ],
+          ),
+
+
+          SizedBox(height: 20,),
+
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (country.containsKey('subregion')) ...[
+                const Text('Subregion:',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.amber,
+                    fontStyle: FontStyle.normal,
+                  ),),
+
+                  //SUBREGION
+                  Text('-${country['subregion'] ?? "N/A"} ',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),),
+              ]
+            ],
+          ),
+
+          SizedBox(height: 20,),
+
+             Row(
+               children: [
+             if (country.containsKey('currencies')) ...[
+               const Text('Currencies:',
+                  style: TextStyle(
+                   fontSize: 20,
+                 color: Colors.amber,
+                 fontStyle: FontStyle.normal,
+                ),),
+
+               for (var currency in country['currencies'].values)
+               Text('-${currency['name']} ',
+               style: TextStyle(
+                fontSize: 18,
+                ),),
+              ]
+               ],
+             ),
+
+            SizedBox(height: 20,),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                if (country.containsKey('languages')) ...[
+                  const Text('Languages :',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.amber,
+                      fontStyle: FontStyle.normal,
+                    ),),
+                  for (var lang in country['languages'].values) Text('- $lang',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),),
+
+                ],
+
+              ],
+            )
+
+
+
+
+          ] ,
       ),),
     );
   }
