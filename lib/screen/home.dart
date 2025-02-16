@@ -42,6 +42,7 @@ class _HomeState extends State<Home> {
 
 
   Future<void> fetchCountries() async {
+    isLoading = true;
     try {
       final response = await http.get(Uri.parse('https://restcountries.com/v3.1/all'));
 
@@ -72,11 +73,7 @@ class _HomeState extends State<Home> {
     setState(() {
       searchText = text;
       if(text.isEmpty){
-        filteredCountries = countries
-            .where((country) => country['name']['common']
-            .toLowerCase()
-            .contains(lastSearchText.toLowerCase())
-        ).toList();
+        filteredCountries = countries;
 
       }else {
         lastSearchText = text;
